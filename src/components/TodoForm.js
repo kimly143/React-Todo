@@ -30,6 +30,8 @@ export default class TodoForm extends React.Component {
 	render() {
 		return (
 			<Td className="todo-form">
+				<h2>Welcome to your Todo App!</h2>
+
 				<form onSubmit={this.onSubmit}>
 					<label htmlFor="todo">What would you like to add?</label>
 					<TdForm

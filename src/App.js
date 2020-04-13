@@ -8,7 +8,8 @@ class App extends React.Component {
 		nextId: 1
 	};
 	constructor() {
-		super();
+    super();
+    //bind all functions
 		this.addTodo = this.addTodo.bind(this);
 		this.markDone = this.markDone.bind(this);
 		this.clearDone = this.clearDone.bind(this);
@@ -17,7 +18,8 @@ class App extends React.Component {
 	//when enter, add item to to do list
 	addTodo(text) {
 		const todo = {
-			id: this.state.nextId,
+      // id: this.state.nextId,
+      id: Date.now(),
 			text,
 			done: false
 		};
@@ -33,7 +35,7 @@ class App extends React.Component {
 		this.setState({ todos });
 	}
 
-	//clear all item(s) mark done
+	//clear all item(s) marked done
 	clearDone() {
 		const todos = this.state.todos.filter((todo) => {
 			return !todo.done;
@@ -44,7 +46,6 @@ class App extends React.Component {
 		console.log(this.state.todos);
 		return (
 			<div>
-				<h2>Welcome to your Todo App!</h2>
 				<TodoForm addTodo={this.addTodo} />
 				<TodoList todos={this.state.todos} markDone={this.markDone} clearDone={this.clearDone}/>
 			</div>
