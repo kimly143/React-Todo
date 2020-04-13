@@ -3,10 +3,6 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
 class App extends React.Component {
-	// you will need a place to store your state in this component.
-	// design `App` to be the parent component of your application.
-	// this component is going to take care of state, and any change handlers you need to work with your state
-
 	state = {
 		todos: [],
 		nextId: 1
@@ -15,7 +11,10 @@ class App extends React.Component {
 		super();
 		this.addTodo = this.addTodo.bind(this);
 		this.markDone = this.markDone.bind(this);
+		this.clearDone = this.clearDone.bind(this);
 	}
+
+	//when enter, add item to to do list
 	addTodo(text) {
 		const todo = {
 			id: this.state.nextId,
@@ -24,11 +23,21 @@ class App extends React.Component {
 		};
 		this.setState({ todos: [ ...this.state.todos, todo ], nextId: this.state.nextId + 1 });
 	}
+
+	//add a strike through item(s) that click on (done)
 	markDone(id) {
 		const todos = this.state.todos.map((todo) => ({
 			...todo,
 			done: todo.id === id ? !todo.done : todo.done //just to flip the value of done (false/true)
 		}));
+		this.setState({ todos });
+	}
+
+	//clear all item(s) mark done
+	clearDone() {
+		const todos = this.state.todos.filter((todo) => {
+			return !todo.done;
+		});
 		this.setState({ todos });
 	}
 	render() {
@@ -37,7 +46,7 @@ class App extends React.Component {
 			<div>
 				<h2>Welcome to your Todo App!</h2>
 				<TodoForm addTodo={this.addTodo} />
-				<TodoList todos={this.state.todos} markDone={this.markDone}  />
+				<TodoList todos={this.state.todos} markDone={this.markDone} clearDone={this.clearDone}/>
 			</div>
 		);
 	}
