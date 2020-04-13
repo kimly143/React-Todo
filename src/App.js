@@ -1,25 +1,27 @@
 import React from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import SearchForm from './components/SearchForm';
 
 class App extends React.Component {
 	state = {
 		todos: [],
-		nextId: 1
+		query: ''
 	};
 	constructor() {
-    super();
-    //bind all functions
+		super();
+		//bind all functions
 		this.addTodo = this.addTodo.bind(this);
 		this.markDone = this.markDone.bind(this);
 		this.clearDone = this.clearDone.bind(this);
+		this.updateQuery = this.updateQuery.bind(this);
 	}
 
 	//when enter, add item to to do list
 	addTodo(text) {
 		const todo = {
-      // id: this.state.nextId,
-      id: Date.now(),
+			// id: this.state.nextId,
+			id: Date.now(),
 			text,
 			done: false
 		};
@@ -42,12 +44,29 @@ class App extends React.Component {
 		});
 		this.setState({ todos });
 	}
+
+	//search todo list
+	updateQuery(query) {
+		this.setState({ query });
+	}
+
+	getVisibleTodos() {
+		const queryRX = new RegExp(this.state.query, 'i');
+		return this.state.todos.filter((todo) => {
+			if (this.state.query === '') return true;
+			return queryRX.test(todo.text);
+		});
+	}
+
 	render() {
-		console.log(this.state.todos);
+		//console.log(this.state.todos);
+		const todos = this.getVisibleTodos();
 		return (
 			<div>
 				<TodoForm addTodo={this.addTodo} />
-				<TodoList todos={this.state.todos} markDone={this.markDone} clearDone={this.clearDone}/>
+				<SearchForm query={this.state.query} updateQuery={this.updateQuery} />
+				{/* <TodoList todos={this.state.todos} markDone={this.markDone} clearDone={this.clearDone} /> */}
+				<TodoList todos={todos} markDone={this.markDone} clearDone={this.clearDone} />
 			</div>
 		);
 	}
