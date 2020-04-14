@@ -1,32 +1,36 @@
 import React from 'react';
-import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/styles';
 
-const Search = styled.div`
-	text-align: center;
-	margin-bottom: 2vh;
-`;
-const SearchBox = styled.input`
-	margin-left: 2vw;
-	width: 15vw;
-	padding: 5px;
-`;
+const styles = {
+	root: {
+		textAlign: 'center',
+		marginBottom: '2vh'
+	},
+	searchBox: {
+		marginLeft: '2vw',
+		width: '20vw',
+		padding: '5px'
+	}
+};
 
-export default class SearchForm extends React.Component {
-
+class SearchForm extends React.Component {
 	render() {
-        console.log('hell')
+		console.log('hell');
 		return (
-			<Search className="search-form">
-				<label htmlFor="search">Search by Name</label>
-				<SearchBox
-					type="text"
+			<div className={this.props.classes.root}>
+				<TextField className={this.props.classes.searchBox}
+                    // type="text"
+                    label="Search by Name"
 					name="search"
 					value={this.props.text}
 					onChange={(event) => {
 						this.props.updateQuery(event.target.value);
 					}}
 				/>
-			</Search>
+			</div>
 		);
 	}
 }
+
+export default withStyles(styles)(SearchForm);

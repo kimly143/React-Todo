@@ -1,17 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import { withStyles } from '@material-ui/styles';
+import { TextField } from '@material-ui/core';
 
-const Td = styled.div`
-	text-align: center;
-	margin-bottom: 2vh;
-`;
-const TdForm = styled.input`
-	margin-left: 2vw;
-	width: 15vw;
-	padding: 5px;
-`;
+const styles = {
+	root: {
+		textAlign: 'center',
+		marginBottom: '2vh'
+	},
+	todoText: {
+		marginLeft: '2vw',
+		width: '20vw',
+		padding: '5px'
+	}
+};
 
-export default class TodoForm extends React.Component {
+class TodoForm extends React.Component {
 	state = {
 		text: ''
 	};
@@ -29,11 +32,12 @@ export default class TodoForm extends React.Component {
 	}
 	render() {
 		return (
-			<Td className="todo-form">
+			<div className={this.props.classes.root}>
 				<h2>Welcome to KB Todo App!</h2>
 				<form onSubmit={this.onSubmit}>
-					<label htmlFor="todo">What would you like to add?</label>
-					<TdForm
+					<TextField
+						className={this.props.classes.todoText}
+						label="What would you like to add?"
 						type="text"
 						name="todo"
 						value={this.state.text}
@@ -42,7 +46,9 @@ export default class TodoForm extends React.Component {
 						}}
 					/>
 				</form>
-			</Td>
+			</div>
 		);
 	}
 }
+
+export default withStyles(styles)(TodoForm);
