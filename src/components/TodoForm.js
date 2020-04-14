@@ -5,7 +5,8 @@ import { TextField } from '@material-ui/core';
 const styles = {
 	root: {
 		textAlign: 'center',
-		marginBottom: '2vh'
+		marginBottom: '2vh',
+		
 	},
 	todoText: {
 		marginLeft: '2vw',
