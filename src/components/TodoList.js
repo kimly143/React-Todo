@@ -11,25 +11,24 @@ const styles = {
 	}
 };
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       '& > *': {
-//         margin: theme.spacing(1),
-//       },
-//     },
-//   }));
-
 class TodoList extends React.Component {
 	render() {
 		return (
 			<div className={this.props.classes.root}>
 				<h3> Your list: </h3>
 				{this.props.todos.map((todo) => (
-					<p className={todo.done? this.props.classes.doneTodo : ''} key={todo.id} onClick={() => this.props.markDone(todo.id)}>
+					<p
+						className={todo.done ? this.props.classes.doneTodo : ''}
+						key={todo.id}
+						onClick={() => this.props.markDone(todo.id)}
+					>
 						{todo.text}
 					</p>
-                ))}
-                <Button variant="contained" color="primary" onClick={this.props.clearDone}> Clear done </Button>
+				))}
+				<Button variant="contained" color="primary" onClick={this.props.clearDone}>
+					{' '}
+					Clear done{' '}
+				</Button>
 
 				{/* <button onClick={this.props.clearDone}> Clear done </button> */}
 			</div>

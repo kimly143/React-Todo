@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/styles';
 
+//style using material-ui
 const styles = {
 	root: {
 		textAlign: 'center',
@@ -16,11 +17,10 @@ const styles = {
 
 class SearchForm extends React.Component {
 	render() {
-		console.log('hell');
+		//console.log('hello');
 		return (
 			<div className={this.props.classes.root}>
-				<TextField className={this.props.classes.searchBox}
-                    // type="text"
+				<TextField className={this.props.classes.searchBox} //using material-ui for textfield
                     label="Search by Name"
 					name="search"
 					value={this.props.text}
